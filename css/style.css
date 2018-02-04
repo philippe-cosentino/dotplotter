@@ -1,0 +1,93 @@
+﻿.unselectable {
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	-ms-touch-action: none; 
+	touch-action: none; 
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1
+}
+
+table{
+   border: 1px solid black;
+   padding:0px;
+   border-collapse: collapse;
+}
+
+td {
+	border: 1px solid black;
+	margin:0px;
+	padding:0.5em;
+}
+
+canvas {
+	margin:0px;
+	padding:0px;
+}
+
+body {
+	padding:1em;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+hr { 
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid 1px;
+}
+
+.bouton {
+    background-color: #888888; 
+    border: none;
+    color: white;
+	margin:0;
+    padding: 0.5em 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	border-radius: 1em;
+	cursor:pointer;
+}
+
+
+p {
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+.rotate {
+    margin: 0;
+    padding: 0;
+    -webkit-transform-origin: 0 0;
+       -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+         -o-transform-origin: 0 0;
+            transform-origin: 0 0;
+    -webkit-transform: rotate(-90deg);
+       -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+         -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+}
+
+.sequence {
+	width:100%;
+	overflow:scroll;
+	overflow-y:hidden;
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+}

@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<title>Comparaison de séquences nucléotidiques par Dotplot</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="icon" type="image/png" href="css/favicon.png" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	</head>
+
+	<body style="margin:0;padding-left:2em;padding-right:2em;display:none;"> 
+		<div id="div_saisie_seq">
+			<h1 class="unselectable">Dotplotter : comparaison de séquences nucléotidiques par Dotplot</h1>
+			<p class="unselectable"><small><i>Auteur de l'application : Philippe Cosentino</i></small></p>
+			<p class="unselectable">&nbsp;</p>
+			<p class="unselectable"><b>Méthode 1 : choisir un exemple dans la banque intégrée :</b>
+			<select id="selectExemples" class="unselectable" onchange="changeExemple(this.value)" >
+			</select></p>
+			<p class="unselectable">&nbsp;&nbsp;&nbsp;(ou)</p>
+			<p class="unselectable"><b>Méthode 2 : copier/coller les séquences à comparer dans les champs ci-dessous</b></p>
+			<div style="padding-left:2em">
+				<p class="unselectable"><i>Séquence de l'ARN pré-messager (ou séquence du brin codant du gène) :</i></p>
+				<textarea id="text_seq1" style="width:100%;height:15vh;font-size:0.8em;" onkeyup="modifieSeq()" oninput="modifieSeq()"></textarea>
+				<br>
+				<p class="unselectable"><i>Séquence de l'ARN messager :</i></p>
+				<textarea id="text_seq2" style="width:100%;height:15vh;font-size:0.8em;" onkeyup="modifieSeq()" oninput="modifieSeq()" ></textarea>
+			</div>
+			<hr>
+			<p class="unselectable">Ne pas convertir les nucléotides : <input type="checkbox" id="check_notconv" onchange="doNotConvert(this.checked)"></p>
+			<p class="unselectable"><b>Longueur minimale (en nombre de nucléotides) pour qu'une correspondance soit :</b></p>
+			<p class="unselectable" style="padding-left:1em">mise en valeur : <input type="number" id="text_minval" value="0" style="width:3em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			sélectionnable : <input type="number" id="text_minsel" value="20" style="width:3em"><br>
+			<div id="but_compare" onclick="startCompare()" class="bouton unselectable" style="display:none;width:10em;position:absolute;bottom:2em;left:50%;transform: translate(-5em,0);">Comparer</div>
+		</div>
+    
+		<div class="unselectable" id="div_affiche_seq" style="display:none">
+			<p><b><label id="div_titre_sequence">Titre de la séquence</label></b></p>
+			<p><i><label id="label_seq1">Séquence de l'ARN pré-messager</label> :</i></p>
+			<div id="div_seq1" class="sequence"></div>
+			<br>
+			<p><i>Séquence de l'ARN messager :</i></p>
+			<div id="div_seq2" class="sequence"></div>
+			<div id="but_restart" onclick="restart()" class="bouton unselectable" style="z-index:10;width:12em;position:absolute;bottom:2em;left:50%;transform: translate(-6em,0);">Nouvelle comparaison</div>
+		</div>
+		
+		
+		<div id="div_graphiques" style="display:none" class="unselectable">
+			<div id="divTitreGraph" style="position:absolute;width:50%;font-size:1.2em;left:0%;text-align:center; text-decoration: underline;"><p><b>Graphique de ressemblance (Dotplot)</b></p></div>
+			<div id="divTitreSeg" style="position:absolute;width:50%;font-size:1.2em;left:50%;text-align:center; text-decoration: underline;"><p><b>Représentation des molécules d'ARN</b></p></div>
+			<div id="divLegendeY" class="rotate rotate-position" style="position:absolute;text-align:center;font-size:0.7em"><p>Séquence de l'ARNm</p></div>
+			<div id="divLegendeX" style="position:absolute;width:50%;text-align:center;font-size:0.7em"><p>Séquence de l'ARN pré-messager</p></div>
+			<div id="divConsigneGraph" style="position:absolute;width:50%;text-align:center;font-size:0.8em"><p><i>Cliquer sur le graphique pour identifier les séquences identiques</i></p></div>
+			<canvas id="canvDot" style="position: absolute; z-index: 0;"></canvas>
+			<canvas id="canvDiag" onClick="clickCanv(event)" onMouseMove="survolCanv(event)" style="position: absolute; z-index: 1;cursor:pointer;"></canvas>
+			<canvas id="canvSeg" onClick="clickCanvSeg(event)" style="position: absolute; z-index: 0;cursor:pointer;"></canvas>
+			<canvas id="canvOverSeg" style="position: absolute; z-index: 1;pointer-events: none;"></canvas>
+		</div>
+		
+		<div id="div_progress" style="display:none;position: absolute;width:50%;top:40%;left:25%;">
+			<p align="center"><b>Calcul du graphique de ressemblance (Dotplot)<br>Veuillez patienter</b></p>
+			<div id="barre_progress" style="position: relative;background-color:#AAA;height:2em;width:50%;top:40%;left:25%;border:1px solid black;">
+				<div id="barre_progress2" style="position: absolute;background-color:red;height:2em;width:0%;z-index:1"></div>
+			</div>
+		</div>
+		
+		<div id="div_dispo" style="position:absolute;z-index:99;opacity:0.5;background-color:#A44;display:none;">aaa</div>
+		
+	</body>
+	<script src="js/initVariables.js"></script>
+	<script src="js/exemples.js"></script>
+	<script src="js/gereCanvas.js"></script>
+	<script src="js/gereSequences.js"></script>
+	<script src="js/gereSegments.js"></script>
+	<script>
+		initialise();
+	</script>
+</html>
